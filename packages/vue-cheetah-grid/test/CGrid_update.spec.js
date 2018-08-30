@@ -193,9 +193,12 @@ describe('c-grid update', () => {
     let { rawGrid } = wrapper.vm.$refs.grid
     expect(rawGrid.dataSource.length).to.equal(2)
 
-    wrapper.vm.filter = (rec) => rec.text === 'text1';
-    ({ rawGrid } = wrapper.vm.$refs.grid)
-    expect(rawGrid.dataSource.length).to.equal(1)
+    wrapper.vm.filter = (rec) => rec.text === 'text1'
+
+    return wrapper.vm.$nextTick().then(() => {
+      ({ rawGrid } = wrapper.vm.$refs.grid)
+      expect(rawGrid.dataSource.length).to.equal(1)
+    })
   })
   it('CGrid update class & textContent', () => {
     const Component = {
